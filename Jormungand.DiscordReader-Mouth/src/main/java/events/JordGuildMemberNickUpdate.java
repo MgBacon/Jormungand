@@ -1,19 +1,21 @@
 package events;
 
-public class JordGuildMemberNickUpdate implements GenericEvent {
-    String oldNick="";
-    String newNick="";
-    String guildName="";
-    String guildId="";
-    String username="";
-    String userId="";
+import net.dv8tion.jda.api.events.guild.member.update.GuildMemberUpdateNicknameEvent;
 
-    public JordGuildMemberNickUpdate(String oldNick, String newNick, String guildName, String guildId, String username, String userId) {
-        this.oldNick = oldNick;
-        this.newNick = newNick;
-        this.guildName = guildName;
-        this.guildId = guildId;
-        this.username = username;
-        this.userId = userId;
+public class JordGuildMemberNickUpdate implements GenericEvent {
+    private String oldNick="";
+    private String newNick="";
+    private String guildName="";
+    private String guildId="";
+    private String username="";
+    private String userId="";
+
+    public JordGuildMemberNickUpdate(GuildMemberUpdateNicknameEvent event){
+        this.oldNick = event.getOldNickname();
+        this.newNick = event.getNewNickname();
+        this.guildName = event.getGuild().getName();
+        this.guildId = event.getGuild().getId();
+        this.username = event.getUser().getName();
+        this.userId = event.getUser().getId();
     }
 }

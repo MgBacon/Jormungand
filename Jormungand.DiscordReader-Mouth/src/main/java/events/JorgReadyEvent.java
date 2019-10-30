@@ -1,13 +1,14 @@
 package events;
 
+import net.dv8tion.jda.api.events.guild.*;
 
 public class JorgReadyEvent implements GenericEvent {
     private String name;
     private long responsenumber;
 
-    public JorgReadyEvent(String name, long responseNumber){
-        this.name = name;
-        this.responsenumber = responseNumber;
+    public JorgReadyEvent(GuildReadyEvent event){
+        this.name = event.getGuild().getName();
+        this.responsenumber = event.getResponseNumber();
     }
 
     public long getResponsenumber() {

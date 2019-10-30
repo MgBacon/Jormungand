@@ -1,11 +1,15 @@
 package events;
 
-public class JorgGuildBan {
-    String username="";
-    String guildName="";
+import net.dv8tion.jda.api.events.guild.GuildBanEvent;
 
-    public JorgGuildBan(String username, String guildName) {
-        this.username = username;
-        this.guildName = guildName;
+public class JorgGuildBan {
+    private String userId;
+    private String username;
+    private String guildName;
+
+    public JorgGuildBan(GuildBanEvent event) {
+        this.userId = event.getUser().getId();
+        this.username = event.getUser().getName();
+        this.guildName = event.getGuild().getName();
     }
 }
