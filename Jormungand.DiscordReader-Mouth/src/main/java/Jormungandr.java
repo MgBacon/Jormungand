@@ -1,10 +1,6 @@
-
 import com.google.gson.Gson;
 import entities.JorgUser;
-import events.JordGuildMemberNickUpdate;
-import events.JorgJoinEvent;
-import events.JorgMessageReceived;
-import events.JorgReadyEvent;
+import events.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.GenericEvent;
@@ -49,49 +45,40 @@ public class Jormungandr extends ListenerAdapter {
     }
 
     public void onGuildJoin(GuildJoinEvent event) {
-        JorgJoinEvent gje = new JorgJoinEvent(
-                event.getGuild().getSelfMember().getTimeJoined().toEpochSecond(),
-                event.getGuild().getName(),
-                event.getGuild().getId());
+        JorgJoinEvent gje = new JorgJoinEvent(event);
         String queueObject = gson.toJson(gje);
         System.out.println(queueObject);
     }
 
     public void onGuildReady(GuildReadyEvent event) {
-        JorgReadyEvent jre = new JorgReadyEvent(
-                event.getGuild().getName(),
-                event.getResponseNumber()
-        );
+        JorgReadyEvent jre = new JorgReadyEvent(event);
         System.out.println(gson.toJson(jre));
     }
     //TODO for ALL: move this all
     public void onGuildMemberUpdateNickname(GuildMemberUpdateNicknameEvent event) {
-        JordGuildMemberNickUpdate jgmn = new JordGuildMemberNickUpdate(
-                event.getOldNickname(),
-                event.getNewNickname(),
-                event.getGuild().getName(),
-                event.getGuild().getId(),
-                event.getUser().getName(),
-                event.getUser().getId()
-        );
+        JordGuildMemberNickUpdate jgmn = new JordGuildMemberNickUpdate(event);
         System.out.println(gson.toJson(jgmn));
     }
 
     public void onGuildLeave(GuildLeaveEvent event) {
-
+        JorgGuildLeaveEvent jgle = new JorgGuildLeaveEvent(event);
+        System.out.println(gson.toJson(jgle));
     }
     //Those 4 send the same data, thinking about how to merge them
     //info: guildId, userId, username
     public void onGuildMemberLeave(GuildMemberLeaveEvent event) {
-
+        JorgGuildMemberLeave jgml = new JorgGuildMemberLeave(event);
+        System.out.println(gson.toJson(jgml));
     }
 
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
-
+        JorgGuildMemberJoin jgmj = new JorgGuildMemberJoin(event);
+        System.out.println(gson.toJson(jgmj));
     }
 
     public void onGuildBan(GuildBanEvent event) {
-
+        JorgGuildBan jgb = new JorgGuildBan(event);
+        System.out.println(gson.toJson(jgb));
     }
 
     public void onGuildUnban(GuildUnbanEvent event) {
