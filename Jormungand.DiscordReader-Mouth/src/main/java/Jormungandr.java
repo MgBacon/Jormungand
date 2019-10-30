@@ -82,7 +82,8 @@ public class Jormungandr extends ListenerAdapter {
     }
 
     public void onGuildUnban(GuildUnbanEvent event) {
-
+        JorgGuildUnban jgu = new JorgGuildUnban(event);
+        System.out.println(gson.toJson(jgu));
     }
     //thinking if I even want to keep this one
     public void onGuildUpdateIcon(GuildUpdateIconEvent event) {
@@ -97,7 +98,7 @@ public class Jormungandr extends ListenerAdapter {
     }
     //main command pipeline
     public void onMessageReceived(MessageReceivedEvent event){
-        JorgMessageReceived jmr=new JorgMessageReceived(
+        JorgMessageReceived jmr = new JorgMessageReceived(
                 event.getMessage().getContentRaw(),
                 event.getMessage().getMentionedMembers(), //TODO: doesn't really work here, have to cast JDA Members into JorgMembers
                 event.getChannel().getId(),
