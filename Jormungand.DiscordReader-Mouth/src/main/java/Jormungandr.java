@@ -1,5 +1,4 @@
 import com.google.gson.Gson;
-import entities.JorgUser;
 import events.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -9,7 +8,6 @@ import net.dv8tion.jda.api.events.guild.*;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberLeaveEvent;
 import net.dv8tion.jda.api.events.guild.member.update.GuildMemberUpdateNicknameEvent;
-import net.dv8tion.jda.api.events.guild.update.GuildUpdateIconEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.user.update.UserUpdateOnlineStatusEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -19,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
+import java.time.LocalTime;
 
 public class Jormungandr extends ListenerAdapter {
 
@@ -40,8 +39,11 @@ public class Jormungandr extends ListenerAdapter {
     //next three are mess around listeners, gonna get wiped once this step is done
     //genericEvent doesn't really have any use anyway but provides general info on what events you'd receive
     public void onGenericEvent(GenericEvent event) {
-        //System.out.println(event.getClass().getName());
-        //System.out.println(event.getResponseNumber());
+        System.out.print(event.getResponseNumber());
+        System.out.print(": ");
+        System.out.print(event.getClass().getName());
+        System.out.print(" - ");
+        System.out.print(LocalTime.now());
     }
 
     public void onGuildJoin(GuildJoinEvent event) {
@@ -54,7 +56,7 @@ public class Jormungandr extends ListenerAdapter {
         JorgReadyEvent jre = new JorgReadyEvent(event);
         System.out.println(gson.toJson(jre));
     }
-    //TODO for ALL: move this all
+
     public void onGuildMemberUpdateNickname(GuildMemberUpdateNicknameEvent event) {
         JordGuildMemberNickUpdate jgmn = new JordGuildMemberNickUpdate(event);
         System.out.println(gson.toJson(jgmn));
@@ -64,8 +66,7 @@ public class Jormungandr extends ListenerAdapter {
         JorgGuildLeaveEvent jgle = new JorgGuildLeaveEvent(event);
         System.out.println(gson.toJson(jgle));
     }
-    //Those 4 send the same data, thinking about how to merge them
-    //info: guildId, userId, username
+
     public void onGuildMemberLeave(GuildMemberLeaveEvent event) {
         JorgGuildMemberLeave jgml = new JorgGuildMemberLeave(event);
         System.out.println(gson.toJson(jgml));
@@ -85,25 +86,20 @@ public class Jormungandr extends ListenerAdapter {
         JorgGuildUnban jgu = new JorgGuildUnban(event);
         System.out.println(gson.toJson(jgu));
     }
-    //thinking if I even want to keep this one
-    public void onGuildUpdateIcon(GuildUpdateIconEvent event) {
-    }
-    //needed to see if subs have to be cleared, needed info: channelId
+
     public void onTextChannelDelete(TextChannelDeleteEvent event) {
-
+        JorgTextChannelDelete jtcd = new JorgTextChannelDelete(event);
+        System.out.println(gson.toJson(jtcd));
     }
-    //more of a friend service to scream at him when his bot is down
+
     public void onUserUpdateOnlineStatus(UserUpdateOnlineStatusEvent event) {
-
+        JorgUserUpdateOnlineStatus juuos = new JorgUserUpdateOnlineStatus(event);
+        System.out.println(gson.toJson(juuos));
     }
+
     //main command pipeline
     public void onMessageReceived(MessageReceivedEvent event){
-        JorgMessageReceived jmr = new JorgMessageReceived(
-                event.getMessage().getContentRaw(),
-                event.getMessage().getMentionedMembers(), //TODO: doesn't really work here, have to cast JDA Members into JorgMembers
-                event.getChannel().getId(),
-                event.getChannelType(),
-                new JorgUser(event.getAuthor())
-        );
+        JorgMessageReceived jmr = new JorgMessageReceived(event);
+        System.out.println(gson.toJson(jmr));
     }
 }
