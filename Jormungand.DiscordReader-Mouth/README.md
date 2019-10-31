@@ -1,3 +1,6 @@
 # config.txt
-
-single line file with the discord token, placed within `mouth` root
+placed within `mouth` root
+discord token  
+[RabbitMQ address]:15672  
+   [Username]  
+   [Password]
