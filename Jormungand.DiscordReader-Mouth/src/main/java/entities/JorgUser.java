@@ -3,10 +3,10 @@ package entities;
 import net.dv8tion.jda.api.entities.User;
 
 public class JorgUser {
-    String id;
-    String username;
-    String discriminator;
-    String avatarUrl;
+    private String id;
+    private String username;
+    private String discriminator;
+    private String avatarUrl;
 
     public JorgUser(User user) {
         this.id = user.getId();
