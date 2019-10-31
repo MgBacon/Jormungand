@@ -7,11 +7,11 @@ import net.dv8tion.jda.api.entities.User;
 import java.util.List;
 
 public class JorgMember {
-    private User user;
+    private JorgUser user;
     private List<Role> roles; //Strings of JDA role names, role colours doesn't matter
 
     public JorgMember(Member member){
-        this.user = member.getUser();
+        this.user = new JorgUser(member.getUser());
         this.roles = member.getRoles();
     }
 }

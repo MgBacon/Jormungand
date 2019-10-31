@@ -16,9 +16,9 @@ public class SendingTest {
         ConnectionFactory factory = new ConnectionFactory();
 
         List<String> content = Files.readAllLines(Paths.get("config.txt"));
-        String host=content.get(1);
-        String username=content.get(2);
-        String password=content.get(3);
+        String host = content.get(1);
+        String username = content.get(2);
+        String password = content.get(3);
 
         factory.setUsername(username);
         factory.setPassword(password);
