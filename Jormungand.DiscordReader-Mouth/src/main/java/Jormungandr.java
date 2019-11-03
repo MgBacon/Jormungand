@@ -22,6 +22,10 @@ import java.time.LocalTime;
 public class Jormungandr {
 
     public static void main(String[] args) throws LoginException, InterruptedException {
+        botLogin();
+    }
+
+    static void botLogin() throws LoginException, InterruptedException{
         try (Stream<String> stream = Files.lines(Paths.get("config.txt"))) {
             String token = stream.findFirst().get();
             JDA jda = new JDABuilder(token)
