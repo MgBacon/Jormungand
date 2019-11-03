@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JorgMessageReceived {
@@ -17,10 +18,9 @@ public class JorgMessageReceived {
 
     public JorgMessageReceived(MessageReceivedEvent event){
         this.rawMessageContent = event.getMessage().getContentRaw();
+        this.mentions = new ArrayList<JorgUser>();
         for(Member member : event.getMessage().getMentionedMembers()){
-            User user = member.getUser();
-            JorgUser ju = new JorgUser(user);
-            assert false;
+            JorgUser ju = new JorgUser(member.getUser());
             this.mentions.add(ju);
         }
         this.channelId = event.getChannel().getId();
