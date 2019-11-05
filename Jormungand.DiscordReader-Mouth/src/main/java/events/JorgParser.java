@@ -16,7 +16,9 @@ import java.time.LocalTime;
 public class JorgParser extends ListenerAdapter {
     private String guildId;
 
-    //TODO: add senders, see SendingTest for more info, exchanges should follow the structure jormungand.guild.<eventname> for guild events, jormungand.message for generic messages
+    //TODO: add senders, see SendingTest for more info,
+    // exchanges should follow the structure jormungand.guild.<eventname> for guild events,
+    // jormungand.message for generic messages
     private Gson gson = new Gson();
 
     //next three are mess around listeners, gonna get wiped once this step is done
@@ -72,5 +74,6 @@ public class JorgParser extends ListenerAdapter {
     //main command pipeline
     public void onMessageReceived(MessageReceivedEvent event){
         JorgMessageReceived jmr = new JorgMessageReceived(event);
+        System.out.println(gson.toJson(jmr));
     }
 }
