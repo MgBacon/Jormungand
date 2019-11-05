@@ -3,15 +3,13 @@ package events;
 import entities.JorgUser;
 import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class JorgMessageReceived {
     private String rawMessageContent;
-    private List<JorgUser> mentions;
+    private ArrayList<JorgUser> mentions;
     private String channelId;
     private ChannelType channelType;
     private JorgUser author;

@@ -4,11 +4,10 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class JorgMember {
     private JorgUser user;
-    private List<JorgRole> roles; //Strings of JDA role names, role colours doesn't matter
+    private ArrayList<JorgRole> roles; //Strings of JDA role names, role colours doesn't matter
 
     public JorgMember(Member member){
         this.user = new JorgUser(member.getUser());

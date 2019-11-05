@@ -1,8 +1,6 @@
 package entities;
 
 import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.entities.Member;
 
 public class JorgRole {
     private String roleName;

@@ -1,9 +1,5 @@
 package entities;
 
-import net.dv8tion.jda.api.Permission;
-
-import java.util.EnumSet;
-
 public class JorgPerms {
     private long permissions;
 
